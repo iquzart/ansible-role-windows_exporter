@@ -4,7 +4,7 @@ galaxy_info:
   description: Setup Windows Exporter
   issue_tracker_url: http://example.com/issue/tracker
   license: MIT
-  min_ansible_version: 2.10
+  min_ansible_version: "2.10"
   platforms:
     - name: Windows
       versions:
