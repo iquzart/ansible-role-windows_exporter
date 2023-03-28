@@ -1,6 +1,8 @@
 Windows Exporter
 =========
-[![Ansible Galaxy](https://img.shields.io/badge/galaxy-iquzart.windows_exporter-blue)](https://galaxy.ansible.com/iquzart/windows_exporter)
+[![Ansible Role Name](https://img.shields.io/ansible/role/61839?label=Role%20Name&logo=ansible&style=flat-square)](https://galaxy.ansible.com/iquzart/windows_exporter)
+[![Ansible Quality Score](https://img.shields.io/ansible/quality/61839?label=Ansible%20Quality%20Score&logo=ansible&style=flat-square)](https://galaxy.ansible.com/iquzart/windows_exporter)
+[![Ansible Role Downloads](https://img.shields.io/ansible/role/d/61839?label=Ansible%20Role%20Downloads&logo=ansible&style=flat-square)](https://galaxy.ansible.com/iquzart/windows_exporter)
 [![License](https://img.shields.io/:license-mit-blue.svg)](https://badges.mit-license.org)
 
 
