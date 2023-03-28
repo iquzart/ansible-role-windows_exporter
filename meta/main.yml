@@ -16,6 +16,6 @@ galaxy_info:
   galaxy_tags:
     - monitoring
     - windows
-    - exporter
+    - windows_exporter
     - prometheus
 dependencies: []
