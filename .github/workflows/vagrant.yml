@@ -20,9 +20,6 @@ jobs:
     - name: Setup Ansible
       run: brew install ansible
 
-    - name: Disable OBJC initialize fork safety
-      run: echo "OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES" >> .bash_profile
-
     - name: Show Ansible version
       run: ansible --version
 
@@ -30,7 +27,7 @@ jobs:
       run: vagrant --version
 
     - name: Run vagrant up
-      run: vagrant up
+      run: OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES vagrant up
 
     - name: check box status 
       run: vagrant status
