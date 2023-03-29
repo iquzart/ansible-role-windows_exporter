@@ -29,4 +29,5 @@ jobs:
           $env:ANSIBLE_FORCE_COLOR=$true
           $env:PY_COLORS=1
           $env:MOLECULE_PLATFORMS=$env:MOLECULE_PLATFORMS
+          .\.venv\Scripts\Activate.ps1
           molecule test --all
