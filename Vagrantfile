@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
   
     config.vm.define "windows_server" do |ws|
       ws.vm.box = BOX_IMAGE
-      ws.vm.hostname = HOSTNAME
+      # ws.vm.hostname = HOSTNAME # --> Disabled to reduce setup time
       ws.vm.guest = :windows
       ws.vm.synced_folder ".", "/vagrant", disabled: true
       ws.vm.provider "virtualbox" do |vb|
