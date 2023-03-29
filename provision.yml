@@ -1,0 +1,11 @@
+---
+- name: Setup windows_exporter on Dev/Test node
+  hosts: all
+  gather_facts: true
+
+  pre_tasks:
+    - name: Test connection
+      ansible.windows.win_ping:
+
+  roles:
+    - ../.
