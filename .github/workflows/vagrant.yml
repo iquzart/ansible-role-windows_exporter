@@ -8,14 +8,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
+    - name: Setup Ansible
+      run: brew install ansible
 
-    - name: Cache Vagrant boxes
-      uses: actions/cache@v2
-      with:
-        path: ~/.vagrant.d/boxes
-        key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
-        restore-keys: |
-          ${{ runner.os }}-vagrant-
+    - name: Show Ansible version
+      run: ansible --version
 
     - name: Show Vagrant version
       run: vagrant --version
