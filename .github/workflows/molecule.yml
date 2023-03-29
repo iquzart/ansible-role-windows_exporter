@@ -28,4 +28,4 @@ jobs:
         run: |
           $env:MOLECULE_PLATFORMS=$env:MOLECULE_PLATFORMS
           .\.venv\Scripts\Activate.ps1
-          molecule test --all
+          molecule test --all --no-ansi
