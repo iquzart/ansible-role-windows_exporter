@@ -1,2 +1,11 @@
 ---
 # tasks file for ansible-windows-exporter
+
+- name: Include asserts
+  ansible.builtin.include_tasks: 
+    file: asserts.yml
+
+- name: Include checks
+  ansible.builtin.include_tasks: 
+    file: facts.yml
+

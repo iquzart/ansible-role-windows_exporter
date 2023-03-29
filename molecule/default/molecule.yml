@@ -1,0 +1,40 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: win2012r2
+    image: mcr.microsoft.com/windows/servercore:2012r2
+    privileged: true
+    command: powershell.exe -NoLogo -NoProfile -Command Start-Sleep -s 600
+  - name: win2016
+    image: mcr.microsoft.com/windows/servercore:ltsc2016
+    privileged: true
+    command: powershell.exe -NoLogo -NoProfile -Command Start-Sleep -s 600
+  - name: win2019
+    image: mcr.microsoft.com/windows/servercore:ltsc2019
+    privileged: true
+    command: powershell.exe -NoLogo -NoProfile -Command Start-Sleep -s 600
+  - name: win2022
+    image: mcr.microsoft.com/windows/servercore:ltsc2022
+    privileged: true
+    command: powershell.exe -NoLogo -NoProfile -Command Start-Sleep -s 600
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  linting:
+    enabled: true
+  log: true
+scenario:
+  name: default
+# verifier:
+#   name: testinfra
+#   lint:
+#     name: flake8
+#   linting:
+#     enabled: true
+#   env:
+#     PYTHONWARNINGS: "ignore:DEPRECATION"
+#   directory: ../../tests/
