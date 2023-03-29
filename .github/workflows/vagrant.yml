@@ -21,7 +21,7 @@ jobs:
       run: brew install ansible
 
     - name: Disable OBJC initialize fork safety
-      run: export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+      run: echo "OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES" >> .bash_profile
 
     - name: Show Ansible version
       run: ansible --version
