@@ -19,10 +19,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m venv .venv
-          source .venv/bin/activate
-          pip install --upgrade pip
-          pip install ansible molecule docker
+            python -m venv .venv
+            .\.venv\Scripts\Activate.ps1
+            pip install --upgrade pip
+            pip install ansible molecule docker
 
       - name: Run Tests
         run: |
