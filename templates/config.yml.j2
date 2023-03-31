@@ -1,0 +1,22 @@
+---
+
+{{ ansible_managed | comment }}
+
+collectors:
+  enabled: {{ enabled_collectors }}
+#collector:
+#  service:
+#    services-where: Name='{{ windows_exporter_service_name }}'
+#  scheduled_task:
+#    blacklist: /Microsoft/.+
+#  textfile:
+#    directory: "{{ windows_exporter_textfile_collector_directory }}"
+
+log:
+  level: debug
+scrape:
+  timeout-margin: 0.5
+telemetry:
+  addr: "{{ windows_exporter_listen_address }}:{{ windows_exporter_port }}"
+  path: /metrics
+  max-requests: 5

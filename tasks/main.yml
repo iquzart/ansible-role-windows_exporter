@@ -5,7 +5,11 @@
   ansible.builtin.include_tasks: 
     file: asserts.yml
 
-- name: Include checks
+- name: Include facts
   ansible.builtin.include_tasks: 
     file: facts.yml
+
+- name: Include install
+  ansible.builtin.include_tasks: 
+    file: install.yml
 

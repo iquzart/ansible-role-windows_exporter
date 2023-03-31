@@ -1,0 +1,45 @@
+---
+
+- name: Check if Windows exporter is already installed
+  ansible.windows.win_service:
+    name: windows_exporter
+  register: service_query
+  ignore_errors: true
+
+- name: Download Windows exporter version {{ windows_exporter_version }}
+  ansible.windows.win_get_url:
+    url: "{{ windows_exporter_download_url }}"
+    dest: "{{ ansible_env.TEMP }}\\windows_exporter_{{ windows_exporter_version }}.msi"
+    force: true
+  register: download_msi
+  when: not service_query.exists
+
+- name: Install Windows exporter version {{ windows_exporter_version }}
+  ansible.windows.win_package:
+    path: "{{ ansible_env.TEMP }}\\windows_exporter_{{ windows_exporter_version }}.msi"
+    state: present
+  when: 
+    - not service_query.exists
+    - download_msi
+
+- name: Copy configuration file → {{ windows_exporter_install_path }}
+  ansible.windows.win_template:
+    src: config.yml.j2
+    dest: "{{ windows_exporter_install_path }}\\config.yml"
+    backup: true
+  register: configuration_state
+  notify: Restart Windows Exporter
+  
+- name: Ensure Windows Exporter service is running and enabled
+  ansible.windows.win_service:
+    name: "{{ windows_exporter_service_name }}"
+    path: '"{{ windows_exporter_install_path }}\\windows_exporter.exe" --config.file="{{ windows_exporter_install_path }}\\config.yml"'
+    display_name: "Prometheus exporter for Windows machines"
+    state: started
+    dependencies:
+      - 'Winmgmt'
+    start_mode: delayed
+  register: service_result
+  when: 
+    - configuration_state.changed
+    - not ansible_check_mode
