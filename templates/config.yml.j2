@@ -4,13 +4,6 @@
 
 collectors:
   enabled: {{ enabled_collectors }}
-#collector:
-#  service:
-#    services-where: Name='{{ windows_exporter_service_name }}'
-#  scheduled_task:
-#    blacklist: /Microsoft/.+
-#  textfile:
-#    directory: "{{ windows_exporter_textfile_collector_directory }}"
 
 log:
   level: debug
