@@ -1,7 +1,9 @@
 Windows Exporter
 =========
-[![Ansible Galaxy](https://img.shields.io/badge/galaxy-iquzart.windows_exporter-blue)](https://galaxy.ansible.com/iquzart/windows_exporter)
-[![License](https://img.shields.io/:license-mit-blue.svg)](https://badges.mit-license.org)
+[![Role Name](https://img.shields.io/ansible/role/61839?label=Role%20Name&logo=ansible&style=flat-square)](https://galaxy.ansible.com/iquzart/windows_exporter)
+[![Quality Score](https://img.shields.io/ansible/quality/61839?label=Quality%20Score&logo=ansible&style=flat-square)](https://galaxy.ansible.com/iquzart/windows_exporter)
+[![Role Downloads](https://img.shields.io/ansible/role/d/61839?label=Role%20Downloads&logo=ansible&style=flat-square)](https://galaxy.ansible.com/iquzart/windows_exporter)
+[![License](https://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://badges.mit-license.org)
 
 
 Ansible role for Windows Exporter setup

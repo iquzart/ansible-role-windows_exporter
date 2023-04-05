@@ -1,0 +1,8 @@
+---
+
+- name: Faile if target is not Windows based operating system
+  ansible.builtin.assert:
+    that:
+      - "ansible_os_family == 'Windows'"
+    fail_msg: "{{ ansible_distribution }} is not a supported for this role"
+    quiet: true

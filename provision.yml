@@ -1,0 +1,33 @@
+---
+- name: Setup windows_exporter on Dev/Test node
+  hosts: all
+  gather_facts: true
+
+  pre_tasks:
+    - name: Test connection
+      ansible.windows.win_ping:
+
+    - name: Install IIS
+      ansible.windows.win_feature:
+        name: Web-Server
+        state: present
+
+    - name: Start IIS
+      ansible.windows.win_service:
+        name: W3SVC
+        start_mode: auto
+        state: started
+
+    - name: Install MSMQ feature
+      ansible.windows.win_feature:
+        name: MSMQ
+        state: present
+
+    - name: Start MSMQ service
+      ansible.windows.win_service:
+        name: MSMQ
+        start_mode: auto
+        state: started
+
+  roles:
+    - ../.

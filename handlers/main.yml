@@ -1,2 +1,8 @@
 ---
 # handlers file for ansible-windows-exporter
+
+- name: Restart Windows Exporter
+  ansible.windows.win_service:
+    name: "{{ windows_exporter_service_name }}"
+    state: restarted
+  when: not ansible_check_mode

@@ -1,0 +1,17 @@
+---
+
+- name: Include download_msi
+  ansible.builtin.include_tasks: 
+    file: download_msi.yml
+  tags:
+    - install
+
+- name: Install Windows exporter version {{ windows_exporter_version }}
+  ansible.windows.win_package:
+    path: "{{ windows_exporter_download_path }}\\windows_exporter_{{ windows_exporter_version }}.msi"
+    state: present
+  when: 
+    - download_windows_exporter_msi.status_code == 200
+  tags:
+    - install
+

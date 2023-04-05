@@ -1,0 +1,6 @@
+.vagrant
+.vagrant/*
+inventory*
+**/temp/*
+**/molecule/*
+.temp
