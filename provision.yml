@@ -3,20 +3,32 @@
   hosts: all
   gather_facts: true
 
-  pre_tasks:
-    - name: Test connection
-      ansible.windows.win_ping:
+  # pre_tasks:
+  #   - name: Test connection
+  #     ansible.windows.win_ping:
 
-    - name: Install IIS
-      ansible.windows.win_feature:
-        name: Web-Server
-        state: present
+  #   - name: Install IIS
+  #     ansible.windows.win_feature:
+  #       name: Web-Server
+  #       state: present
 
-    - name: Start IIS
-      ansible.windows.win_service:
-        name: W3SVC
-        start_mode: auto
-        state: started
+  #   - name: Start IIS
+  #     ansible.windows.win_service:
+  #       name: W3SVC
+  #       start_mode: auto
+  #       state: started
+
+    # - name: Check current windows_exporter version.
+    #   win_command: "C:\\Program Files\\windows_exporter\\windows_exporter.exe --version"
+    #   failed_when: false
+    #   changed_when: false
+    #   register: windows_exporter_version_check
+
+
+    # - name: Debug
+    #   debug:
+    #     msg: "{{ windows_exporter_version_check }}"
+
 
     # - name: Install MSMQ feature
     #   ansible.windows.win_feature:

@@ -6,9 +6,11 @@ collectors:
   enabled: {{ enabled_collectors }}
 
 log:
-  level: debug
+  level: {{ windows_exporter_log_level }}
+
 scrape:
   timeout-margin: 0.5
+  
 telemetry:
   addr: "{{ windows_exporter_listen_address }}:{{ windows_exporter_port }}"
   path: /metrics

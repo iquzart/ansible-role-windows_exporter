@@ -1,0 +1,52 @@
+---
+
+- name: Include collector facts
+  ansible.builtin.include_tasks: 
+    file: collector_facts.yml
+  tags:
+    - install
+    - configure
+
+- name: Copy configuration file → {{ windows_exporter_install_path }}
+  ansible.windows.win_template:
+    src: config.yml.j2
+    dest: "{{ windows_exporter_install_path }}\\config.yml"
+    backup: true
+  register: configuration_state
+  notify: Restart Windows Exporter
+  tags:
+    - install
+    - configure
+
+- name: Ensure Windows Exporter service is running and enabled
+  ansible.windows.win_service:
+    name: "{{ windows_exporter_service_name }}"
+    path: '"{{ windows_exporter_install_path }}\\windows_exporter.exe" --config.file="{{ windows_exporter_install_path }}\\config.yml"'
+    display_name: "Prometheus exporter for Windows machines"
+    state: started
+    dependencies:
+      - 'Winmgmt'
+    start_mode: "{{ windows_exporter_start_mode }}"
+  register: service_result
+  when: 
+    - configuration_state.changed
+    - not ansible_check_mode
+  tags:
+    - install
+    - configure
+
+- name: Configure firewall to allow port → {{ windows_exporter_port }}
+  community.windows.win_firewall_rule:
+    name: Windows Exporter
+    localport: "{{ windows_exporter_port }}"
+    action: allow
+    direction: in
+    protocol: tcp
+    state: present
+    enabled: yes
+  when:
+    - windows_exporter_configure_firewall
+  tags:
+    - install
+    - configure
+    - firewall

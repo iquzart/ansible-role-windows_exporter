@@ -6,5 +6,3 @@
       - "ansible_os_family == 'Windows'"
     fail_msg: "{{ ansible_distribution }} is not a supported for this role"
     quiet: true
-
-

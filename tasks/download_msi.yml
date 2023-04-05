@@ -1,0 +1,27 @@
+---
+- name: Check {{ windows_exporter_download_path }} exists
+  ansible.windows.win_stat:
+    path: "{{ windows_exporter_download_path }}"
+  register: check_windows_exporter_download_path
+  tags:
+    - download_msi
+    - install
+
+- name: Create {{ windows_exporter_download_path }} directory to store msi file
+  ansible.windows.win_file:
+    path: "{{ windows_exporter_download_path }}"
+    state: directory
+  when: not check_windows_exporter_download_path.stat.exists
+  tags:
+    - download_msi
+    - install
+
+- name: Download Windows exporter version {{ windows_exporter_version }}
+  ansible.windows.win_get_url:
+    url: "{{ windows_exporter_download_url }}"
+    dest: "{{ windows_exporter_download_path }}\\windows_exporter_{{ windows_exporter_version }}.msi"
+    force: true
+  register: download_windows_exporter_msi
+  tags:
+    - download_msi
+    - install

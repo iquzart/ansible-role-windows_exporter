@@ -1,31 +1,31 @@
 ---
 
-- name: Set Facts | Windows service IIS
+- name: Check for Windows service IIS
   ansible.builtin.win_service:
     name: w3svc
   register: iis
 
-- name: Set Facts | Windows service MSMQ
+- name: Check for Windows service MSMQ
   ansible.builtin.win_service:
     name: msmq
   register: msmq
 
-- name: Set Facts | Windows service ADDC
+- name: Check for Windows service ADDC
   ansible.builtin.win_service:
     name: dns
   register: addc
 
-- name: Set Facts | Windows service MSSQL
+- name: Check for Windows service MSSQL
   ansible.builtin.win_service:
     name: mssqlserver
   register: mssql
 
-- name: Set Facts | Windows service ADCS
+- name: Check for Windows service ADCS
   ansible.builtin.win_service:
     name: certsvc
   register: adcs
 
-- name: Set Fact | Build Collectors based on service status
+- name: Build host specific collectors based on service status
   ansible.builtin.set_fact:
     host_specific_collectors: "{{ [] +
       (['iis'] if iis.exists and iis.state == 'running' else []) +
@@ -34,10 +34,12 @@
       (['adcs'] if adcs.exists and adcs.state == 'running' else []) +
       (['mssql'] if mssql.exists and mssql.state == 'running' else []) }}"
 
-- name: Set Fact | Merge common Collectors with host specific collectors identified
+- name: Merge common collectors with host specific collectors identified
   ansible.builtin.set_fact:
     enabled_collectors: "{{ (windows_exporter_common_collectors + host_specific_collectors) | join(',') }}"
 
-- name: Debug
+- name: Print windows exporter collectors to be enabled
   ansible.builtin.debug:
-    msg: "{{ enabled_collectors }}"
+    msg:
+    - "Host specific collector(s) identified: {{ host_specific_collectors | join(',') }}"
+    - "Collectors to be enabled: {{ enabled_collectors }}"
