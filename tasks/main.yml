@@ -52,22 +52,6 @@
 - name: Include Configure
   ansible.builtin.include_tasks: 
     file: configure.yml
-#  when: windows_exporter_version == installed_exporter_version
-
-# - block:
-#   - name: Include Uninstall
-#     ansible.builtin.include_tasks: uninstall.yml
-#     vars:
-#       windows_exporter_version: "{{ installed_exporter_version }}"
-
-#   - name: Include install
-#     ansible.builtin.include_tasks:
-#       file: install.yml
-
-#   - name: Include configure 
-#     ansible.builtin.include_tasks:
-#       file: configure.yml
-#   when: windows_exporter_version != installed_exporter_version
 
 - name: Check if Windows Exporter responding to requests → http://{{ ansible_host }}:{{ windows_exporter_port }}
   ansible.windows.win_uri:

@@ -3,54 +3,31 @@
   hosts: all
   gather_facts: true
 
-  # pre_tasks:
-  #   - name: Test connection
-  #     ansible.windows.win_ping:
+  pre_tasks:
+    - name: Test connection
+      ansible.windows.win_ping:
 
-  #   - name: Install IIS
-  #     ansible.windows.win_feature:
-  #       name: Web-Server
-  #       state: present
+    - name: Install IIS
+      ansible.windows.win_feature:
+        name: Web-Server
+        state: present
 
-  #   - name: Start IIS
-  #     ansible.windows.win_service:
-  #       name: W3SVC
-  #       start_mode: auto
-  #       state: started
+    - name: Start IIS
+      ansible.windows.win_service:
+        name: W3SVC
+        start_mode: auto
+        state: started
 
-    # - name: Check current windows_exporter version.
-    #   win_command: "C:\\Program Files\\windows_exporter\\windows_exporter.exe --version"
-    #   failed_when: false
-    #   changed_when: false
-    #   register: windows_exporter_version_check
+    - name: Install MSMQ feature
+      ansible.windows.win_feature:
+        name: MSMQ
+        state: present
 
-
-    # - name: Debug
-    #   debug:
-    #     msg: "{{ windows_exporter_version_check }}"
-
-
-    # - name: Install MSMQ feature
-    #   ansible.windows.win_feature:
-    #     name: MSMQ
-    #     state: present
-
-    # - name: Start MSMQ service
-    #   ansible.windows.win_service:
-    #     name: MSMQ
-    #     start_mode: auto
-    #     state: started
-
-    # - name: Install DNS Server role
-    #   ansible.windows.win_feature:
-    #     name: DNS
-    #     state: present
-
-    # - name: Start DNS service
-    #   ansible.windows.win_service:
-    #     name: dns
-    #     start_mode: auto
-    #     state: started
+    - name: Start MSMQ service
+      ansible.windows.win_service:
+        name: MSMQ
+        start_mode: auto
+        state: started
 
   roles:
     - ../.
