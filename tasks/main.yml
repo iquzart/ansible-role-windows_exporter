@@ -34,15 +34,19 @@
       {% else %}
       Windows Exporter Version {{ installed_exporter_version }} will be redeployed with {{ windows_exporter_version }}
       {% endif %}
-  when: windows_exporter_service.exists
+  when: 
+    - windows_exporter_service.exists
+    - installed_exporter_version is defined
 
 - name: Include Uninstall
-  ansible.builtin.include_tasks: 
+  ansible.builtin.include_tasks:
     file: uninstall.yml
     apply:
       vars:
         windows_exporter_version: "{{ installed_exporter_version }}"
-  when: windows_exporter_version != installed_exporter_version
+  when:
+    - windows_exporter_service.exists
+    - windows_exporter_version != installed_exporter_version
 
 - name: Include Install
   ansible.builtin.include_tasks: 
@@ -59,6 +63,4 @@
     return_content: true
   register: windows_exporter_http_request
   failed_when: "'Metrics' not in windows_exporter_http_request.content"
-  when:
-    - windows_exporter_start_mode != 'disabled'
-    - windows_exporter_start_mode != 'manual'
+  when: windows_exporter_start_mode not in ['disabled', 'manual']
