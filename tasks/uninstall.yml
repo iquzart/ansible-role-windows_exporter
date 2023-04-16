@@ -1,7 +1,6 @@
 ---
-
 - name: Include download_msi
-  ansible.builtin.include_tasks: 
+  ansible.builtin.include_tasks:
     file: download_msi.yml
   tags:
     - uninstall
@@ -10,7 +9,7 @@
   ansible.windows.win_package:
     path: "{{ windows_exporter_download_path }}\\windows_exporter_{{ windows_exporter_version }}.msi"
     state: absent
-  when: 
+  when:
     - download_windows_exporter_msi.status_code == 200
   tags:
     - uninstall

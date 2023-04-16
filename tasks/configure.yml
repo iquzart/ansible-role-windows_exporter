@@ -1,7 +1,6 @@
 ---
-
 - name: Include collector facts
-  ansible.builtin.include_tasks: 
+  ansible.builtin.include_tasks:
     file: collector_facts.yml
   tags:
     - install
@@ -25,10 +24,10 @@
     display_name: "Prometheus exporter for Windows machines"
     state: started
     dependencies:
-      - 'Winmgmt'
+      - "Winmgmt"
     start_mode: "{{ windows_exporter_start_mode }}"
   register: service_result
-  when: 
+  when:
     - configuration_state.changed
     - not ansible_check_mode
   tags:
@@ -43,7 +42,7 @@
     direction: in
     protocol: tcp
     state: present
-    enabled: yes
+    enabled: true
   when:
     - windows_exporter_configure_firewall
   tags:
