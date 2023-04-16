@@ -11,14 +11,14 @@ Ansible role for Windows Exporter setup.
 
 Features
 --------------
-```
-1. Download and install Windows Exporter.
-2. Configure Windows Exporter with config.yaml file.
-3. Enable Collectors based on service availability in the target system (IIS, MSSQL, ADDC, ADCS, MSMQ).
-4. Upgrade or Downgrade the deployment based on **windows_exporter_version** variable.
-5. Configurable service Listen address and Port.
-6. Configure windows Firewall.
-```
+  ```
+  1. Download and install Windows Exporter.
+  2. Configure Windows Exporter with config.yaml file.
+  3. Enable Collectors based on service availability in the target system (IIS, MSSQL, ADDC, ADCS, MSMQ).
+  4. Upgrade or Downgrade the windows exporter version.
+  5. Configurable service Listen address and Port.
+  6. Configure windows Firewall.
+  ```
 
 
 Role Variables
