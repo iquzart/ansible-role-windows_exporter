@@ -1,5 +1,4 @@
 ---
-
 - name: Check {{ windows_exporter_download_path }} exists
   ansible.windows.win_stat:
     path: "{{ windows_exporter_download_path }}"

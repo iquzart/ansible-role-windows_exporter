@@ -1,27 +1,27 @@
 ---
 
 - name: Check for Windows service IIS
-  ansible.builtin.win_service:
+  ansible.windows.win_service:
     name: w3svc
   register: iis
 
 - name: Check for Windows service MSMQ
-  ansible.builtin.win_service:
+  ansible.windows.win_service:
     name: msmq
   register: msmq
 
 - name: Check for Windows service ADDC
-  ansible.builtin.win_service:
+  ansible.windows.win_service:
     name: dns
   register: addc
 
 - name: Check for Windows service MSSQL
-  ansible.builtin.win_service:
+  ansible.windows.win_service:
     name: mssqlserver
   register: mssql
 
 - name: Check for Windows service ADCS
-  ansible.builtin.win_service:
+  ansible.windows.win_service:
     name: certsvc
   register: adcs
 

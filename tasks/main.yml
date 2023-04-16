@@ -2,7 +2,7 @@
 # tasks file for ansible-windows-exporter
 
 - name: Include asserts
-  ansible.builtin.include_tasks: 
+  ansible.builtin.include_tasks:
     file: asserts.yml
   tags:
     - always
@@ -13,28 +13,28 @@
   register: windows_exporter_service
   ignore_errors: true
 
-- block: 
-  - name: Get installed windows exporter version
-    ansible.windows.win_shell: '.\windows_exporter.exe --version'
-    args:
-      chdir: "{{ windows_exporter_install_path }}"
-    changed_when: false
-    register: exporter_output
+- block:
+    - name: Get installed windows exporter version
+      ansible.windows.win_shell: '.\windows_exporter.exe --version'
+      args:
+        chdir: "{{ windows_exporter_install_path }}"
+      changed_when: false
+      register: exporter_output
 
-  - name: Get installed windows exporter version | Set version fact
-    set_fact:
-      installed_exporter_version: "{{ exporter_output.stderr | regex_search('\\d+\\.\\d+\\.\\d+') }}"
+    - name: Get installed windows exporter version | Set version fact
+      ansible.builtin.set_fact:
+        installed_exporter_version: "{{ exporter_output.stderr | regex_search('\\d+\\.\\d+\\.\\d+') }}"
   when: windows_exporter_service.exists
 
 - name: Print exporter version identified
-  debug:
+  ansible.builtin.debug:
     msg: >-
       {% if windows_exporter_version == installed_exporter_version %}
       Windows Exporter Version {{ installed_exporter_version }} is already installed!
       {% else %}
       Windows Exporter Version {{ installed_exporter_version }} will be redeployed with {{ windows_exporter_version }}
       {% endif %}
-  when: 
+  when:
     - windows_exporter_service.exists
     - installed_exporter_version is defined
 
@@ -49,12 +49,12 @@
     - windows_exporter_version != installed_exporter_version
 
 - name: Include Install
-  ansible.builtin.include_tasks: 
+  ansible.builtin.include_tasks:
     file: install.yml
   when: (not windows_exporter_service.exists or windows_exporter_version != installed_exporter_version)
 
 - name: Include Configure
-  ansible.builtin.include_tasks: 
+  ansible.builtin.include_tasks:
     file: configure.yml
 
 - name: Check if Windows Exporter responding to requests → http://{{ ansible_host }}:{{ windows_exporter_port }}

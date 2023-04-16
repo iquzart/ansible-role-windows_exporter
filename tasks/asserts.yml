@@ -1,5 +1,4 @@
 ---
-
 - name: Check if target node is running Windows
   ansible.builtin.assert:
     that: "ansible_os_family == 'Windows'"
