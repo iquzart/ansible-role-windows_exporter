@@ -1,6 +1,5 @@
 ---
 # defaults file for ansible-windows-exporter
-
 windows_exporter_common_collectors:
   - cpu
   - cs
@@ -13,7 +12,6 @@ windows_exporter_common_collectors:
   - system
   - tcp
   - textfile
-
 windows_exporter_version: "0.19.0"
 windows_exporter_download_url: "https://github.com/prometheus-community/windows_exporter/releases/download/v{{ windows_exporter_version }}/windows_exporter-{{ windows_exporter_version }}-amd64.msi"
 windows_exporter_service_name: "windows_exporter"
@@ -24,6 +22,4 @@ windows_exporter_textfile_collector_directory: "C:\\Program Files\\windows_expor
 windows_exporter_download_path: "C:\\Install\\exporters"
 windows_exporter_log_level: "debug"
 windows_exporter_start_mode: "delayed"
-
 windows_exporter_configure_firewall: true
-
