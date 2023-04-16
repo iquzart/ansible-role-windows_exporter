@@ -30,4 +30,4 @@
         state: started
 
   roles:
-    - ../.
+    - "{{ playbook_dir }}"

@@ -33,13 +33,19 @@
       (['ad'] if addc.exists and addc.state == 'running' else []) +
       (['adcs'] if adcs.exists and adcs.state == 'running' else []) +
       (['mssql'] if mssql.exists and mssql.state == 'running' else []) }}"
+  register: host_specific_collectors_result
 
 - name: Merge common collectors with host specific collectors identified
   ansible.builtin.set_fact:
     enabled_collectors: "{{ (windows_exporter_common_collectors + host_specific_collectors) | join(',') }}"
 
-- name: Print windows exporter collectors to be enabled
+- name: Print collectors to be enabled
   ansible.builtin.debug:
     msg:
-    - "Host specific collector(s) identified: {{ host_specific_collectors | join(',') }}"
-    - "Collectors to be enabled: {{ enabled_collectors }}"
+      - >-
+        {% if host_specific_collectors_result | length == 0 %}
+        Host specific collector(s) identified: None
+        {% else %}
+        Host specific collector(s) identified: {{ host_specific_collectors | join(',') }}
+        {% endif %}
+      - 'Collectors to be enabled: {{ enabled_collectors }}'
