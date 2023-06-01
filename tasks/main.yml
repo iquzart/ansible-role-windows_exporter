@@ -19,6 +19,7 @@
       args:
         chdir: "{{ windows_exporter_install_path }}"
       changed_when: false
+      check_mode: false
       register: exporter_output
 
     - name: Get installed windows exporter version | Set version fact
